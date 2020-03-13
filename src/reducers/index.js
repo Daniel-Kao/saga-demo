@@ -1,19 +1,22 @@
 import { handleActions } from "redux-actions";
-import { saveArticle } from "../actions";
+import { increment, saveArticle } from "../actions";
 
 const initialState = {
   name: "daniel",
-  article: 0
+  article: {},
+  count: 0
 };
 
 const reducer = handleActions(
   {
-    [saveArticle]: (state, action) => {
-      return {
-        ...state,
-        article: action.payload.res
-      };
-    }
+    [increment]: (state, action) => ({
+      ...state,
+      count: state.count + 1
+    }),
+    [saveArticle]: (state, action) => ({
+      ...state,
+      article: action.payload
+    })
   },
   initialState
 );
